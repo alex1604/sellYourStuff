@@ -1,5 +1,7 @@
 # sellYourStuff. <br/>
 
+This school project is an online second hand shop built in React.js and served by a node.js api connected to a mongodb database and firebase (for storage and user authentication00). <br/>
+
 To run this project:  <br/>
 
 **#1.** Clone the repository. <br/>
