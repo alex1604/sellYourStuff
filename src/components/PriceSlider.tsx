@@ -40,9 +40,9 @@ export default function(props: PriceSliderProps) {
 
   const { min, max, addPrice } = props;
 
-  const onSliderChange = (value: number) => {
-    addPrice({ myMin: value[0], myMax: value[1] });
-    setPriceRange({ myMin: value[0], myMax: value[1] });
+  const onSliderChange = (values: number[]) => {
+    addPrice({ myMin: values[0], myMax: values[1] });
+    setPriceRange({ myMin: values[0], myMax: values[1] });
   };
 
   const getSteps = () => {
