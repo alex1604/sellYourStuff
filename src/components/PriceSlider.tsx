@@ -60,7 +60,7 @@ export default function(props: PriceSliderProps) {
   useEffect(() => {
     getSteps();
     addPrice(priceRange);
-  });
+  }, []);
 
   return (
     <div style={wrapperStyle}>
