@@ -34,16 +34,14 @@ type PriceSliderProps = {
 };
 
 export default function(props: PriceSliderProps) {
-  const [priceRange, setPriceRange] = useState<PriceRange>();
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const [steps, setSteps] = useState<{ [id: number]: string }>({});
-
   const { min, max, addPrice } = props;
 
-  const onSliderChange = (values: number[]) => {
-    addPrice({ myMin: values[0], myMax: values[1] });
-    setPriceRange({ myMin: values[0], myMax: values[1] });
-  };
+  const [priceRange, setPriceRange] = useState<PriceRange>({
+    myMin: min,
+    myMax: max,
+  });
+  const [loaded, setLoaded] = useState<boolean>(false);
+  const [steps, setSteps] = useState<{ [id: number]: string }>({});
 
   const getSteps = () => {
     let nextStep = min;
@@ -53,14 +51,17 @@ export default function(props: PriceSliderProps) {
       nextStep += portion;
       setSteps({ ...steps, [nextStep]: "" });
     }
-    setPriceRange({ myMin: min, myMax: max });
     setLoaded(true);
   };
 
   useEffect(() => {
     getSteps();
-    addPrice(priceRange);
   }, []);
+
+  const onSliderChange = (values: number[]) => {
+    setPriceRange({ myMin: values[0], myMax: values[1] });
+    addPrice({ myMin: values[0], myMax: values[1] });
+  };
 
   return (
     <div style={wrapperStyle}>
@@ -76,7 +77,7 @@ export default function(props: PriceSliderProps) {
               alignItems: "center",
             }}
           >
-            {priceRange.myMin}
+            {priceRange?.myMin}
             <Range
               marks={steps}
               allowCross={false}
@@ -101,7 +102,7 @@ export default function(props: PriceSliderProps) {
               ]}
               railStyle={{ backgroundColor: "gray" }}
             />
-            {priceRange.myMax}
+            {priceRange?.myMax}
           </div>
         </div>
       ) : null}
